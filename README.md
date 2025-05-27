@@ -10,8 +10,8 @@ Siga os passos abaixo para executar a API localmente:
 
 2. **Crie e ative um ambiente virtual**
     ```bash
-    python3 -m venv venv
-    source venv/bin/activate
+    python3 -m venv .venv
+    source .venv/bin/activate
     ```
 
 3. **Instale as dependências**
