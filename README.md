@@ -16,41 +16,33 @@ cd backend-TISS
 
 ```
 
-  
+2. **Instale as dependências**
 
-2. **Crie e ative um ambiente virtual**
-
+	***- use o poetry***
 ```bash
 
-python3 -m venv venv
-//linux
-source venv/bin/activate
-//windows
-.\venv\Scripts\activate
+poetry install
 
 ```
 
-  
-
-3. **Instale as dependências**
+3. **Entre no ambiente**
 
 ```bash
-
-pip install -r requirements.txt
-
+poetry env activate
 ```
 
 4. **Configure seu .env**
+
 ```.env
+DJANGO_SECRET_KEY=seu_token_super_secreto
+DJANGO_DEBUG=1
+
 DB_NAME=TISS
 DB_USER=postgres
 DB_PASSWORD=sua_senha
 DB_HOST=localhost
 DB_PORT=5432
-DJANGO_SECRET_KEY=seu_token_super_secreto
-DJANGO_DEBUG=1
 ``` 
-
 
 5. **Execute a API**
 
@@ -58,26 +50,22 @@ DJANGO_DEBUG=1
 
 ```bash
 
-python manage.py makemigrations
+poetry run python manage.py makemigrations
 
 ```
-
-  
 
 - Aplique as migrações:
 
 ```bash
 
-python manage.py migrate
+poetry run python manage.py migrate
 
 ```
-
-  
 
 - Inicie o servidor de desenvolvimento:
 
 ```bash
 
-python manage.py runserver
+poetry run python manage.py runserver
 
 ```
