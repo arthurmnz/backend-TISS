@@ -11,7 +11,8 @@ Siga os passos abaixo para executar a API localmente:
 2. **Crie e ative um ambiente virtual**
     ```bash
     python3 -m venv .venv
-    source .venv/bin/activate
+    source .venv/bin/activateERROR: Could not find a version that satisfies the requirement corsheaders (from versions: none)
+ERROR: No matching distribution found for corsheaders
     ```
 
 3. **Instale as dependências**

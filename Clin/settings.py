@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tiss_api',
     'rest_framework',
     'core',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [

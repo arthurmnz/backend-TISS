@@ -56,6 +56,8 @@ class GuiaSPSADT(GuiaBase):
     indicador_cobertura_especial = models.CharField(max_length=50, blank=True, null=True)  # 90
     items_solicitados = models.TextField(blank=True, null=True)  # campos 21-28 agrupados por item
 
+    procedimentos_solicitados = models
+
     # Contratado Executante - Campos 29–31
     contratado_executante = models.ForeignKey(Contratado, on_delete=models.CASCADE, related_name='guias_spsadt', blank=True, null=True)  # 29 - 31
 
@@ -70,13 +72,15 @@ class GuiaSPSADT(GuiaBase):
     # Execução - Campos 36–47 (lista de procedimentos realizados)
     procedimentos_realizados = models.ManyToManyField(Procedimento, blank=True, related_name='guias_spsadt_procedimentos')  # 36 a 47
 
-    # Identificação Profissionais - Campos 48–55
+    # Identificação Profissionais - Campos 48–56 CUIDADO COM ESSES CAMPOS (DEIXAR POR ULTIMO)
     cpf_executor = models.CharField(max_length=11, blank=True, null=True)  # 48
     nome_profissional_exec = models.CharField(max_length=100, blank=True, null=True)  # 51
     conselho_profissional_exec = models.CharField(max_length=50, blank=True, null=True)  # 52
     numero_conselho_exec = models.CharField(max_length=50, blank=True, null=True)  # 53
     uf_profissional_exec = models.CharField(max_length=2, blank=True, null=True)  # 54
     cbo_profissional_exec = models.CharField(max_length=10, blank=True, null=True)  # 55
+
+    data_realizacao_procedimentos = models # 56
 
     observacao_justificativa = models.TextField(blank=True, null=True)  # 58
 
