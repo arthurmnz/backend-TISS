@@ -5,7 +5,7 @@ from tiss_api.models.Contratado import  *
 from tiss_api.models.Profissional import *
 
 class GuiaBase(models.Model):
-    registro_ans = models.CharField(max_length=20)  # 1
+    registro_ans = models.CharField(max_length=6)  # 1
     numero_guia = models.CharField(max_length=20, unique=True)  # 3
     tipo_guia = models.CharField(max_length=50)
 
@@ -85,13 +85,13 @@ class GuiaSPSADT(GuiaBase):
     observacao_justificativa = models.TextField(blank=True, null=True)  # 58
 
     # Totais - Campos 59–65
-    total_procedimentos = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 59
-    total_taxes_alugueis = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 60
-    total_materiais = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 61
-    total_opme = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 62
-    total_medicamentos = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 63
-    total_gases_medicinais = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 64
-    total_geral = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 65
+    total_procedimentos = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 59
+    total_taxes_alugueis = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 60
+    total_materiais = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 61
+    total_opme = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 62
+    total_medicamentos = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 63
+    total_gases_medicinais = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 64
+    total_geral = models.DecimalField(max_digits=8, decimal_places=2, blank=False, null=False)  # 65
 
     def __str__(self):
         return f"GuiaSPSADT #{self.numero_guia}"
