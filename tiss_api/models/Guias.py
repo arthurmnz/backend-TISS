@@ -5,7 +5,7 @@ from tiss_api.models.Contratado import  *
 from tiss_api.models.Profissional import *
 
 class GuiaBase(models.Model):
-    registro_ans = models.CharField(max_length=20)  # 1
+    registro_ans = models.CharField(max_length=6)  # 1
     numero_guia = models.CharField(max_length=20, unique=True)  # 3
     tipo_guia = models.CharField(max_length=50)
 
@@ -42,32 +42,33 @@ class GuiaSPSADT(GuiaBase):
     beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE)  # Campos 8–12
 
     # Solicitante - Campos 13–20   
-    codigo_operadora_solic = models.CharField(max_length=20, blank=True, null=True)  # 13
-    nome_contratado_solic = models.CharField(max_length=100, blank=True, null=True)  # 14
-    nome_profissional_solic = models.CharField(max_length=100, blank=True, null=True)  # 15
-    conselho_profissional_solic = models.CharField(max_length=50, blank=True, null=True)  # 16
-    numero_conselho_solic = models.CharField(max_length=50, blank=True, null=True)  # 17
-    uf_profissional_solic = models.CharField(max_length=2, blank=True, null=True)  # 18
-    cbo_profissional_solic = models.CharField(max_length=10, blank=True, null=True)  # 19
-    assinatura_solicitante = models.CharField(max_length=100, blank=True, null=True)  # 20
+    codigo_operadora_solic = models.CharField(max_length=14, default= "99999999999999",blank=False, null=False)  # 13
+    nome_contratado_solic = models.CharField(max_length=70, blank=False, null=False)  # 14
+    nome_profissional_solic = models.CharField(max_length=70, blank=True, null=False)  # 15
+    conselho_profissional_solic = models.CharField(max_length=2, blank=False, null=False)  # 16
+    numero_conselho_solic = models.CharField(max_length=15, blank=False, null=False)  # 17
+    uf_profissional_solic = models.CharField(max_length=2, blank=False, null=False)  # 18
+    cbo_profissional_solic = models.CharField(max_length=6, blank=False, null=False)  # 19 
+ 
 
     # Solicitações - Campos 21–28
-    indicacao_clinica = models.TextField(blank=True, null=True)  # 22
-    indicador_cobertura_especial = models.CharField(max_length=50, blank=True, null=True)  # 90
-    items_solicitados = models.TextField(blank=True, null=True)  # campos 21-28 agrupados por item
+    data_solicitacao = models.DateField(blank=True, null= False)
+    indicacao_clinica = models.TextField(blank=True, null=False)  # 23
+    indicador_cobertura_especial = models.CharField(max_length=2, blank=True, null=False)  # 90
+    # campos 21-28 agrupados por item
 
     procedimentos_solicitados = models
 
     # Contratado Executante - Campos 29–31
     contratado_executante = models.ForeignKey(Contratado, on_delete=models.CASCADE, related_name='guias_spsadt', blank=True, null=True)  # 29 - 31
 
-    # Atendimento - Campos 52–35, 91, 92
-    tipo_atendimento = models.CharField(max_length=50, blank=True, null=True)  # 52
-    indicacao_acidente = models.CharField(max_length=50, blank=True, null=True)  # 30
-    tipo_consulta = models.CharField(max_length=50, blank=True, null=True)  # 34
-    motivo_encerramento = models.CharField(max_length=100, blank=True, null=True)  # 35
-    regime_atendimento = models.CharField(max_length=50, blank=True, null=True)  # 91
-    saude_ocupacional = models.BooleanField(default=False)  # 92
+    # Atendimento - Campos 32–35, 91, 92
+    tipo_atendimento = models.CharField(max_length=2, blank=False, null=False)  # 32
+    indicacao_acidente = models.CharField(max_length=1, blank=False, null=False)  # 33
+    tipo_consulta = models.CharField(max_length=1, blank=True, null=False)  # 34
+    motivo_encerramento = models.CharField(max_length=2, blank=True, null=False)  # 35
+    regime_atendimento = models.CharField(max_length=2, blank=False, null=False)  # 91
+    saude_ocupacional = models.CharField(max_length=2, blank=True, null=False)  # 92
 
     # Execução - Campos 36–47 (lista de procedimentos realizados)
     procedimentos_realizados = models.ManyToManyField(Procedimento, blank=True, related_name='guias_spsadt_procedimentos')  # 36 a 47
@@ -85,13 +86,13 @@ class GuiaSPSADT(GuiaBase):
     observacao_justificativa = models.TextField(blank=True, null=True)  # 58
 
     # Totais - Campos 59–65
-    total_procedimentos = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 59
-    total_taxes_alugueis = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 60
-    total_materiais = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 61
-    total_opme = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 62
-    total_medicamentos = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 63
-    total_gases_medicinais = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 64
-    total_geral = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 65
+    total_procedimentos = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 59
+    total_taxes_alugueis = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 60
+    total_materiais = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 61
+    total_opme = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 62
+    total_medicamentos = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 63
+    total_gases_medicinais = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)  # 64
+    total_geral = models.DecimalField(max_digits=8, decimal_places=2, blank=False, null=False)  # 65
 
     def __str__(self):
         return f"GuiaSPSADT #{self.numero_guia}"
