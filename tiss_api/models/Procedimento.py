@@ -1,12 +1,23 @@
 from django.db import models
 
+TABELA_PROCEDIMENTOS_CHOICES = [
+    ('00', 'Tabela Própria da operadora'),
+    ('01', 'Terminologia Unificada da Saúde Suplementar – TUSS – Procedimentos e Eventos em Saúde'),
+    ('02', 'Terminologia Unificada da Saúde Suplementar – TUSS – Materiais'),
+    ('03', 'Terminologia Unificada da Saúde Suplementar – TUSS – Medicamentos'),
+    ('20', 'Tabela de Procedimentos, Medicamentos e OPM do SUS'),
+    ('22', 'TUSS'),
+    ('98', 'Tabela Não Contemplada pela TISS'),
+]
+
 class Procedimento(models.Model):
-    tabela = models.CharField(max_length=2, blank=False, null=False)  
+    tabela = models.CharField(max_length=2,choices=TABELA_PROCEDIMENTOS_CHOICES, blank=False, null=False)  
     codigo_procedimento = models.CharField(max_length=10, blank=False, null=False) 
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.codigo_procedimento} ({self.tabela})"
+   
    
 # class ProcedimentosSolicitados(Procedimento):
 #     descricao = models.CharField(max_length=150, blank=False, null=False)  # 26

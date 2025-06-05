@@ -79,7 +79,7 @@ class GuiaConsulta(GuiaBase):
     tipo_consulta = models.CharField(max_length=1,choices=TIPO_CONSULTA, blank=False, null=False)  # 19 
 
     tabela = models.CharField(max_length=2, choices=TABELA_PROCEDIMENTOS_CHOICES, blank=False, null=False)# detalha isso aq #obrigatorio
-    codigo_procedimento = models.CharField(max_length=10, blank=False, null=False)# detalha isso aq #obrigatorio
+    codigo_procedimento = models.CharField(max_length=10, blank=False, null=False)# detalha isso aq # obrigatorio
     valor_procedimento = models.DecimalField(max_digits=10,decimal_places=2,blank=False,null=False) # detalha isso aq #obrigatorio
 
     observacao = models.TextField(blank=True, null=True)  # 23
