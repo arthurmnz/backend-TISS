@@ -11,21 +11,45 @@ INDICACAO_ACIDENTES = [
 ]
 
 COBERTURA_ESPECIAL = [
-
+    ('PG', 'Atendimento à Gestante em Plano Hospitalar'),
+    ('PN', 'Pré-Natal em Plano Hospitalar'),
+    ('PP', 'Pós-Parto em Plano Hospitalar'),
+    ('CO', 'Atendimento Cirúrgico Ambulatorial Pré-Operatório (Plano Hospitalar)'),
+    ('CP', 'Atendimento Cirúrgico Ambulatorial Pós-Operatório (Plano Hospitalar)'),
 ]
 
-REGIME_ATENDIMENTO = [
-
+REGIME_ATENDIMENTO_CHOICES = [
+    ('01', 'Ambulatorial'),                       
+    ('02', 'Hospital Dia'),                    
+    ('03', 'Internação Hospitalar'),              
+    ('04', 'Atendimento Domiciliar'),             
+    ('05', 'Urgência/Emergência'),
 ]
 
 TIPO_CONSULTA = [
-
+    ('1', 'Primeira consulta'),
+    ('2', 'Consulta de revisão'),
+    ('3', 'Atendimento de urgência'),
 ]
+
 
 STATUS_GUIA_CHOICES = [
-
+    ('1', 'Normal'),
+    ('2', 'Cancelada'),
+    ('3', 'Substituída'),
+    ('4', 'Glosada'),
+    ('5', 'liquidada')
 ]
 
+TABELA_PROCEDIMENTOS_CHOICES = [
+    ('00', 'Tabela Própria da operadora'),
+    ('01', 'Terminologia Unificada da Saúde Suplementar – TUSS – Procedimentos e Eventos em Saúde'),
+    ('02', 'Terminologia Unificada da Saúde Suplementar – TUSS – Materiais'),
+    ('03', 'Terminologia Unificada da Saúde Suplementar – TUSS – Medicamentos'),
+    ('20', 'Tabela de Procedimentos, Medicamentos e OPM do SUS'),
+    ('22', 'TUSS'),
+    ('98', 'Tabela Não Contemplada pela TISS'),
+]
 
 class GuiaBase(models.Model):
     registro_ans = models.CharField(max_length=6,blank=False, null=False)  # 1
@@ -47,16 +71,16 @@ class GuiaConsulta(GuiaBase):
     profissional_executante = models.ForeignKey(Profissional, on_delete=models.CASCADE)
 
     indicacao_acidente = models.CharField(max_length=1,choices=INDICACAO_ACIDENTES, blank=False, null=False)  # 17
-    indicador_cobertura_especial = models.CharField(max_length=50, blank=True, null=True)  # 27 # choices/tamanho
-    regime_atendimento = models.CharField(max_length=50, blank=True, null=True)  # 28 # choices/tamanho
+    indicador_cobertura_especial = models.CharField(max_length=2,choices=COBERTURA_ESPECIAL, blank=True, null=True)  # 27 
+    regime_atendimento = models.CharField(max_length=2,choices=REGIME_ATENDIMENTO_CHOICES, blank=True, null=True)  # 28 
     saude_ocupacional = models.BooleanField(default=False)  # 29 
 
-    data_atendimento = models.DateField(blank=True, null=True)  # 18  # obrigatorio
-    tipo_consulta = models.CharField(max_length=50, blank=True, null=True)  # 19 # choices/tamanho/obrigatorio
+    data_atendimento = models.DateField(blank=False, null=True)  # 18  
+    tipo_consulta = models.CharField(max_length=1,choices=TIPO_CONSULTA, blank=False, null=False)  # 19 
 
-    tabela = models.CharField()
-    codigo_procedimento = models.CharField()
-    valor_procedimento = models.DecimalField()
+    tabela = models.CharField(max_length=2, choices=TABELA_PROCEDIMENTOS_CHOICES, blank=False, null=False)# detalha isso aq #obrigatorio
+    codigo_procedimento = models.CharField(max_length=10, blank=False, null=False)# detalha isso aq #obrigatorio
+    valor_procedimento = models.DecimalField(max_digits=10,decimal_places=2,blank=False,null=False) # detalha isso aq #obrigatorio
 
     observacao = models.TextField(blank=True, null=True)  # 23
 
