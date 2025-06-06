@@ -11,11 +11,10 @@ INDICACAO_ACIDENTES = [
 ]
 
 COBERTURA_ESPECIAL = [
-    ('PG', 'Atendimento à Gestante em Plano Hospitalar'),
-    ('PN', 'Pré-Natal em Plano Hospitalar'),
-    ('PP', 'Pós-Parto em Plano Hospitalar'),
-    ('CO', 'Atendimento Cirúrgico Ambulatorial Pré-Operatório (Plano Hospitalar)'),
-    ('CP', 'Atendimento Cirúrgico Ambulatorial Pós-Operatório (Plano Hospitalar)'),
+    ('PG', 'Gestante'),              # Mais conciso e padrão TISS
+    ('PN', 'Pré-Natal'),
+    ('PP', 'Pós-Parto'),
+    ('CP', 'Cobertura Parcial Temporária (CPT)'), 
 ]
 
 REGIME_ATENDIMENTO_CHOICES = [
@@ -34,7 +33,7 @@ TIPO_CONSULTA = [
 
 
 STATUS_GUIA_CHOICES = [
-    ('1', 'Normal'),
+    ('1', 'Pendente'),
     ('2', 'Cancelada'),
     ('3', 'Substituída'),
     ('4', 'Glosada'),
@@ -42,13 +41,12 @@ STATUS_GUIA_CHOICES = [
 ]
 
 TABELA_PROCEDIMENTOS_CHOICES = [
-    ('00', 'Tabela Própria da operadora'),
-    ('01', 'Terminologia Unificada da Saúde Suplementar – TUSS – Procedimentos e Eventos em Saúde'),
-    ('02', 'Terminologia Unificada da Saúde Suplementar – TUSS – Materiais'),
-    ('03', 'Terminologia Unificada da Saúde Suplementar – TUSS – Medicamentos'),
+    ('00', 'Tabela Própria da Operadora ou Outras Terminologias'),
+    ('01', 'TUSS - Procedimentos e Eventos em Saúde'),
+    ('02', 'TUSS - Materiais'),
+    ('03', 'TUSS - Medicamentos'),
     ('20', 'Tabela de Procedimentos, Medicamentos e OPM do SUS'),
-    ('22', 'TUSS'),
-    ('98', 'Tabela Não Contemplada pela TISS'),
+    ('98', 'Terminologia Não Contemplada pela TISS'),
 ]
 
 class GuiaBase(models.Model):
