@@ -1,7 +1,7 @@
-from rest_framework.serializers import ModelSerializer
-from tiss_api.models.Guias import *
+from rest_framework import ModelSerializer
+from tiss_api.models import Guias
 
 class GuiaConsultaSerializer(ModelSerializer):
     class Meta:
-        model = GuiaConsulta
+        model = Guias
         fields = '__all__'
